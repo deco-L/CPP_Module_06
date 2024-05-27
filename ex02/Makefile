@@ -6,12 +6,12 @@
 #    By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#              #
-#    Updated: 2024/05/27 12:58:10 by csakamot         ###   ########.fr        #
+#    Updated: 2024/05/27 13:11:42 by csakamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##----Executable File Name-----##
-NAME			= serialize
+NAME			= base
 ##-----------------------------##
 
 ##-----Directory Location------##
