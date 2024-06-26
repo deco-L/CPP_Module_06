@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/16 18:25:13 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:44:40 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ private:
   static bool isIntLiteral( const std::string& literal );
   static bool isFloatLiteral( const std::string& literal );
   static bool isDoubleLiteral( const std::string& literal );
+  static bool isInvalidLiteral( const std::string& literal );
+  static bool isExceptionliteral( const std::string& literal );
 
 public:
   static void converter( const std::string& literal );

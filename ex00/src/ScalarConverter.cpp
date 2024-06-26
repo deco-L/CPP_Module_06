@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/16 19:01:05 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:57:06 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,40 @@ bool  ScalarConverter::isDoubleLiteral(const std::string& literal)
   return *end == '\0';
 }
 
+bool  ScalarConverter::isInvalidLiteral(const std::string& literal)
+{
+  return (true);
+}
+
+bool  ScalarConverter::isExceptionLiteral(const std::string& literal)
+{
+  if (literal == "+inf")
+  {
+
+  }
+  else if (literal == "-inf")
+  {
+
+  }
+  else if (literal == "nan")
+  {
+    std::cout << "char:\vimpossible\n"
+              << "int:\vimpossible\n"
+              << "float:\vnanf\n"
+              << "double:\vnan" << std::endl;
+  }
+  return (true);
+}
+
 void  ScalarConverter::converter(const std::string& literal)
 {
-  try
-  {
-    if (ScalarConverter::isCharLiteral(literal))
-      std::cout << "char ok!" << std::endl;
-    else
-    {
-      throw ScalarConverter::invalidArguments();
-    }
-    if (ScalarConverter::isIntLiteral(literal))
-      std::cout << "int ok!" << std::endl;
-    else
-      throw ScalarConverter::invalidArguments();
-    if (ScalarConverter::isFloatLiteral(literal))
-      std::cout << "float ok!" << std::endl;
-    else
-      throw ScalarConverter::invalidArguments();
-    if (ScalarConverter::isDoubleLiteral(literal))
-      std::cout << "double ok!" << std::endl;
-    else
-      throw ScalarConverter::invalidArguments();
-  }
-  catch(const std::exception& e)
-  {
-    std::cerr << e.what() << '\n';
-  }
+  if (ScalarConverter::isCharLiteral(literal))
+    std::cout << "char ok!" << std::endl;
+  if (ScalarConverter::isIntLiteral(literal))
+    std::cout << "int ok!" << std::endl;
+  if (ScalarConverter::isFloatLiteral(literal))
+    std::cout << "float ok!" << std::endl;
+  if (ScalarConverter::isDoubleLiteral(literal))
+    std::cout << "double ok!" << std::endl;
   return ;
 }
