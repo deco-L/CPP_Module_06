@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/26 17:57:06 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:19:35 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,41 @@ bool  ScalarConverter::isDoubleLiteral(const std::string& literal)
 
 bool  ScalarConverter::isInvalidLiteral(const std::string& literal)
 {
+  if (literal.length() != 1)
+    return (false);
   return (true);
 }
 
 bool  ScalarConverter::isExceptionLiteral(const std::string& literal)
 {
-  if (literal == "+inf")
+  if (literal == "+inf" || literal == "+inff")
   {
-
+    std::cout << "char:\timpossible\n"
+              << "int:\timpossible\n"
+              << "float:\t" << std::numeric_limits<float>::infinity() << "\n"
+              << "double:\t" << std::numeric_limits<double>::infinity()
+              << std::endl;
   }
-  else if (literal == "-inf")
+  else if (literal == "-inf" || literal == "-inff")
   {
-
+    std::cout << "char:\timpossible\n"
+              << "int:\timpossible\n"
+              << "float:\t" << -std::numeric_limits<float>::infinity() << "\n"
+              << "double:\t" << -std::numeric_limits<double>::infinity()
+              << std::endl;
   }
-  else if (literal == "nan")
+  else if (literal == "nan" || literal == "nanf")
   {
-    std::cout << "char:\vimpossible\n"
-              << "int:\vimpossible\n"
-              << "float:\vnanf\n"
-              << "double:\vnan" << std::endl;
+    std::cout << "char:\timpossible\n"
+              << "int:\timpossible\n"
+              << "float:\tnanf\n"
+              << "double:\tnan" << std::endl;
   }
   return (true);
 }
 
 void  ScalarConverter::converter(const std::string& literal)
 {
-  if (ScalarConverter::isCharLiteral(literal))
-    std::cout << "char ok!" << std::endl;
-  if (ScalarConverter::isIntLiteral(literal))
-    std::cout << "int ok!" << std::endl;
-  if (ScalarConverter::isFloatLiteral(literal))
-    std::cout << "float ok!" << std::endl;
-  if (ScalarConverter::isDoubleLiteral(literal))
-    std::cout << "double ok!" << std::endl;
+  ScalarConverter::isExceptionLiteral(literal);
   return ;
 }
