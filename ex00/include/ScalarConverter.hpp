@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/27 19:18:53 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/06/28 01:54:36 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ private:
   static  double  _value;
 
   ScalarConverter( void );
+  ~ScalarConverter();
   static void charConverter( void );
   static void intConverter( void );
   static void floatConverter( void );

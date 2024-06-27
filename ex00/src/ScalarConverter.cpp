@@ -6,13 +6,17 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/27 20:11:57 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/06/28 01:55:12 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
 double  ScalarConverter::_value = 0;
+
+ScalarConverter::ScalarConverter(void) {}
+
+ScalarConverter::~ScalarConverter() {}
 
 const char* ScalarConverter::invalidArguments::what(void) const throw()
 {
