@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/27 13:15:04 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:18:53 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,22 @@
 #include <iostream>
 #include <limits>
 #include <exception>
+#include <sstream>
 
 class ScalarConverter
 {
 private:
-  static bool isCharLiteral( const std::string& literal );
-  static bool isIntLiteral( const std::string& literal );
-  static bool isFloatLiteral( const std::string& literal );
-  static bool isDoubleLiteral( const std::string& literal );
-  static bool isInvalidLiteral( const std::string& literal );
+  static  double  _value;
+
+  ScalarConverter( void );
+  static void charConverter( void );
+  static void intConverter( void );
+  static void floatConverter( void );
+  static void doubleConverter( void );
   static bool isExceptionLiteral( const std::string& literal );
+  static void isInvalidLiteral( const std::string& literal );
 
 public:
-  ScalarConverter( void );
   static void converter( const std::string& literal );
 
   class invalidArguments : public std::exception
