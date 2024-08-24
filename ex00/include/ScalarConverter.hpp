@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/08/24 17:48:31 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:03:49 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ class ScalarConverter
 private:
   static  double  _value;
   static  bool    _inf;
+  static  size_t  _zeroCount;
+  static  bool    _isDot;
 
   ScalarConverter( void );
   ScalarConverter( const ScalarConverter& obj );
   ~ScalarConverter();
 
+  static void countZerosAfterDot( const std::string& str);
   static void charConverter( void );
   static void intConverter( void );
   static void floatConverter( void );

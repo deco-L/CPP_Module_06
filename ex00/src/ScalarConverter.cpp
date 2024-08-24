@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/08/24 17:52:15 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:08:31 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 double  ScalarConverter::_value = 0;
 bool    ScalarConverter::_inf = false;
+size_t  ScalarConverter::_zeroCount = 0;
+bool    ScalarConverter::_isDot = true;
 
 ScalarConverter::ScalarConverter(void) {}
 
@@ -29,13 +31,39 @@ const char* ScalarConverter::invalidArguments::what(void) const throw()
   return ("\e[1;38;5;160mError: Invalid argument.\e[0m");
 }
 
+void ScalarConverter::countZerosAfterDot(const std::string& str)
+{
+  std::size_t dotPos = str.find('.');
+  if (dotPos == std::string::npos) {
+    ScalarConverter::_isDot = false;
+    return ;
+  }
+  std::string afterDot = str.substr(dotPos + 1);
+  for (size_t i = 0; afterDot[i] != '\0' && afterDot[i] != 'f'; i++) {
+    if (afterDot[i] != '0') {
+      ScalarConverter::_isDot = false;
+      ScalarConverter::_zeroCount = 0;
+    }
+    else
+      ScalarConverter::_zeroCount++;
+  }
+  if (!ScalarConverter::_zeroCount)
+    ScalarConverter::_isDot = false;
+  return ;
+}
+
+
 void  ScalarConverter::isInvalidLiteral(const std::string& literal)
 {
   std::stringstream ss;
 
   if (literal.length() == 0)
     throw ScalarConverter::invalidArguments();
-  if (std::isdigit(literal[0]) && literal[literal.length() - 1] == 'f')
+  ScalarConverter::countZerosAfterDot(literal);
+  if (
+    (std::isdigit(literal[0]) || literal[0] == '+' || literal[0] == '-')
+    && literal[literal.length() - 1] == 'f'
+  )
     ss << literal.substr(0, literal.length() - 1);
   else
     ss << literal;
@@ -123,7 +151,14 @@ void  ScalarConverter::floatConverter(void)
   float tmp;
 
   tmp = static_cast<float>(ScalarConverter::_value);
-  std::cout << "float:\t" << tmp << "f" << std::endl;
+  std::cout << "float:\t" << tmp;
+  if (ScalarConverter::_isDot)
+    std::cout << '.';
+  if (ScalarConverter::_zeroCount) {
+    std::string zeros(ScalarConverter::_zeroCount, '0');
+    std::cout << zeros;
+  }
+  std::cout << 'f' << std::endl;
   return ;
 }
 
@@ -133,8 +168,16 @@ void  ScalarConverter::doubleConverter(void)
     std::cout << "double:\tinf" << std::endl;
   else if (ScalarConverter::_inf && ScalarConverter::_value == -__DBL_MAX__)
     std::cout << "double:\t-inf" << std::endl;
-  else
-    std::cout << "double:\t" << ScalarConverter::_value << std::endl;
+  else {
+    std::cout << "double:\t" << ScalarConverter::_value;
+    if (ScalarConverter::_isDot)
+      std::cout << '.';
+    if (ScalarConverter::_zeroCount) {
+      std::string zeros(ScalarConverter::_zeroCount, '0');
+      std::cout << zeros;
+    }
+  }
+  std::cout << std::endl;
   return ;
 }
 
