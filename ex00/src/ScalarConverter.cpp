@@ -6,13 +6,14 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/08/24 16:46:21 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:52:15 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
 double  ScalarConverter::_value = 0;
+bool    ScalarConverter::_inf = false;
 
 ScalarConverter::ScalarConverter(void) {}
 
@@ -44,8 +45,10 @@ void  ScalarConverter::isInvalidLiteral(const std::string& literal)
   if (ss.fail() &&
     (ScalarConverter::_value == __DBL_MAX__ ||
     ScalarConverter::_value == -__DBL_MAX__)
-  )
+  ) {
+    ScalarConverter::_inf = true;
     return ;
+  }
   if (ss.fail())
   {
     if (literal.length() != 1)
@@ -126,9 +129,9 @@ void  ScalarConverter::floatConverter(void)
 
 void  ScalarConverter::doubleConverter(void)
 {
-  if (ScalarConverter::_value == __DBL_MAX__)
+  if (ScalarConverter::_inf && ScalarConverter::_value == __DBL_MAX__)
     std::cout << "double:\tinf" << std::endl;
-  else if (ScalarConverter::_value == -__DBL_MAX__)
+  else if (ScalarConverter::_inf && ScalarConverter::_value == -__DBL_MAX__)
     std::cout << "double:\t-inf" << std::endl;
   else
     std::cout << "double:\t" << ScalarConverter::_value << std::endl;

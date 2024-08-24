@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/08/24 16:52:02 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:48:31 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ScalarConverter
 {
 private:
   static  double  _value;
+  static  bool    _inf;
 
   ScalarConverter( void );
   ScalarConverter( const ScalarConverter& obj );
