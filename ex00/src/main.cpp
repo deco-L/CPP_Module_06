@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/16 18:29:11 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 16:46:14 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int main(int argc, char *argv[]) {
   draw_terminal_line();
   if (argc != 2)
   {
-    draw_terminal_line();
     std::cerr << "\e[38;5;160mError: Invalid arguments.\e[0m" << std::endl;
+    draw_terminal_line();
     return (EXIT_FAILURE);
   }
   ScalarConverter::converter(argv[1]);

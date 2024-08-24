@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/07/14 18:29:39 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 16:46:21 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@ double  ScalarConverter::_value = 0;
 
 ScalarConverter::ScalarConverter(void) {}
 
+ScalarConverter::ScalarConverter(const ScalarConverter& obj)
+{
+  *this = obj;
+}
+
 ScalarConverter::~ScalarConverter() {}
 
 const char* ScalarConverter::invalidArguments::what(void) const throw()
 {
-  return ("\e[1;38;5;182mError: Invalid argument.\e[0m");
+  return ("\e[1;38;5;160mError: Invalid argument.\e[0m");
 }
 
 void  ScalarConverter::isInvalidLiteral(const std::string& literal)
@@ -148,4 +153,17 @@ void  ScalarConverter::converter(const std::string& literal)
   ScalarConverter::floatConverter();
   ScalarConverter::doubleConverter();
   return ;
+}
+
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj)
+{
+  if (this != &obj) {
+    ;
+  }
+  else
+    std::cout << "\e[1;31mAnimal Error: "
+              << "Attempted self-assignment in copy assignment operator"
+              << "\e[0m"
+              << std::endl;
+  return(*this);
 }
