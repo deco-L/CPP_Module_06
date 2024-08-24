@@ -6,7 +6,7 @@
 /*   By: csakamot <csakamot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:21:20 by csakamot          #+#    #+#             */
-/*   Updated: 2024/06/28 03:11:14 by csakamot         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:45:20 by csakamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,32 @@ void  identify(Base* p)
 
 void  identify(Base& p)
 {
-  if (dynamic_cast<A*>(&p))
-    std::cout << "The type of this Base pointer is A." << std::endl;
-  else if (dynamic_cast<B*>(&p))
-    std::cout << "The type of this Base pointer is B." << std::endl;
-  else if (dynamic_cast<C*>(&p))
-    std::cout << "The type of this Base pointer is C." << std::endl;
-  return ;
+  try {
+    A& a_ref = dynamic_cast<A&>(p);
+    std::cout << "The type of this Base reference is A." << std::endl;
+    (void)a_ref;
+    return ;
+  } catch (const std::bad_cast& e) {
+    std::cout << "Failed to cast Base reference: " << e.what() << std::endl;
+  }
+
+  try {
+    B& b_ref = dynamic_cast<B&>(p);
+    std::cout << "The type of this Base reference is B." << std::endl;
+    (void)b_ref;
+    return ;
+  } catch (const std::bad_cast& e) {
+    std::cout << "Failed to cast Base reference: " << e.what() << std::endl;
+  }
+
+  try {
+    C& c_ref = dynamic_cast<C&>(p);
+    std::cout << "The type of this Base reference is C." << std::endl;
+    (void)c_ref;
+    return ;
+  } catch (const std::bad_cast& e) {
+    std::cout << "Failed to cast Base reference: " << e.what() << std::endl;
+  }
 }
 
 int main(void) {
